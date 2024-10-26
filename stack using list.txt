@@ -1,0 +1,102 @@
+#include<iostream>
+using namespace std;
+class Node
+{
+    public:
+    int data;
+    Node* next;
+    Node()
+    {
+        data=0;
+        next=NULL;
+    }
+    Node(int data)
+    {
+        this->data=data;
+        this->next=NULL;
+    }
+};
+class Stack 
+{
+    Node *top;
+    public:
+    Stack()
+    {
+        top=NULL;
+    }
+    void push()
+    {
+        int data;
+        cout<<"Enter the element to push:";
+        cin>>data;
+        Node* newnode=new Node(data);
+        newnode->next=top;
+        top=newnode;
+    }
+    void pop()
+    {
+        Node* temp=top;
+        if(isempty())
+        {
+            cout<<"Stack is underflow\n";
+        }
+        top=top->next;
+        cout<<"Removed element= "<<temp->data;
+        delete temp;
+    }
+    void peek()
+    {
+        cout<<"Top element= "<<top->data<<endl;
+    }
+    void print()
+    {
+        Node* temp=top;
+        cout<<"\nElements in the stack:\n";
+        while(temp!=NULL)
+        {
+            cout<<temp->data<<"\n";
+            temp=temp->next;
+        }
+    }
+    bool isempty()
+    {
+        if(top==NULL)
+            return true;
+        else
+            return false;
+    }
+};
+int main()
+{
+    Stack s;
+    int ch;
+    char b;
+    do
+    {
+        cout<<"Enter your choice:\n1.Push\n2.Pop\n3.Peek\n4.isempty\n=>";
+        cin>>ch;
+        if(ch==1)
+        {
+            s.push();
+            s.print();
+        }
+        if(ch==2)
+        {
+            s.pop();
+            s.print();
+        }
+        if(ch==3)
+        {
+            s.peek();
+        }
+        if(ch==4)
+        {
+            if(s.isempty())
+                cout<<"Stack is empty";
+            else
+                cout<<"Stack is not empty";
+        }
+        cout<<"\nDo you want to continue press y else press n:";
+        cin>>b;
+    }while(b=='y');
+}
